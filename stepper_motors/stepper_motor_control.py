@@ -11,19 +11,22 @@ L298 stepper tester file:
 https://github.com/gavinlyonsrepo/RpiMotorLib/blob/master/test/L298_Step_Test.py
 '''
 
-import time 
+import time
 import RPi.GPIO as GPIO
 from RpiMotorLib import RpiMotorLib
 
 
-BLACK_PIN = 7
-GREEN_PIN = 11
-RED_PIN = 13
-BLUE_PIN = 15
-GpioPins = [BLACK_PIN, GREEN_PIN, RED_PIN, BLUE_PIN]
+# Black, Green, Red, Blue
+GpioPinsOne = [7, 11, 13, 15]
+GpioPinsTwo = [12, 16, 18, 22]
+GpioPinsThree = [29, 31, 33, 35]
+GpioPinsFour = [32, 36, 38, 40]
 
 
-motor_one = RpiMotorLib.BYJMotor("MyMotorOne", "Nema")
+front_left_motor = RpiMotorLib.BYJMotor("MotorOne", "Nema")
+front_right_motor = RpiMotorLib.BYJMotor("MotorTwo", "Nema")
+back_left_motor = RpiMotorLib.BYJMotor("MotorThree", "Nema")
+back_right_motor = RpiMotorLib.BYJMotor("MotorFour", "Nema")
 
 
 def one_phase(self):
@@ -42,13 +45,61 @@ def two_phase(self):
 
 
 # More precise, twice as many steps
-def half_step(self, step_delay, steps, counterclockwise):
+def half_step(self, motor, step_delay, steps, counterclockwise):
 	# Arguments for motor run function
     # (GPIOPins, stepdelay, steps, counterclockwise, verbose, steptype, initdelay)
-    motor_one.motor_run(GpioPins, step_delay, steps, counterclockwise, True, "half", 1)
+    motor.motor_run(GpioPinsOne, step_delay, steps, counterclockwise, True, "half", 1)
 	pass
 
 
-half_step(0.05, 25, True)
+def move_north(self, step_delay, steps):
+	'''
+	Moves all four wheels forward.
+	'''
+	half_step(front_left_motor, step_delay, steps, True)
+	half_step(front_right_motor, step_delay, steps, False)
+	half_step(back_left_motor, step_delay, steps, True)
+	half_step(back_right_motor, step_delay, steps, False)
+
+
+def move_west(self):
+	'''
+	front left: backward
+	front right: forward
+	back left: forward
+	back right: backward
+	'''
+	half_step(front_left_motor, step_delay, steps, False)
+	half_step(front_right_motor, step_delay, steps, False)
+	half_step(back_left_motor, step_delay, steps, True)
+	half_step(back_right_motor, step_delay, steps, True)
+
+
+def move_east(self, step_delay, steps):
+	'''
+	front left: forward
+	front right: backward
+	back left: backward
+	back right: forward
+	'''
+	half_step(front_left_motor, step_delay, steps, True)
+	half_step(front_right_motor, step_delay, steps, True)
+	half_step(back_left_motor, step_delay, steps, False)
+	half_step(back_right_motor, step_delay, steps, False)
+
+
+def move_south(self, step_delay, steps):
+	'''
+	Moves all four wheels backward.
+	'''
+	half_step(front_left_motor, step_delay, steps, False)
+	half_step(front_right_motor, step_delay, steps, True)
+	half_step(back_left_motor, step_delay, steps, False)
+	half_step(back_right_motor, step_delay, steps, True)
+
+
+
+
+move_north(0.05, 25)
 GPIO.cleanup() # Optional
 exit()
