@@ -16,33 +16,65 @@ void setup() {
 }
 
 void loop() {
-  Serial.println(currDriveMode);
   if (Serial.available() > 0) {
     currDriveMode = Serial.parseInt();
   }
 
-  switch (currDriveMode) {
-    case 1:
-      driveNorth();
-    case 2:
-      driveSouth();
-    case 3:
-      driveEast();
-    case 4:
-      driveWest();
-    case 5:
-      driveDiagNE();
-    case 6:
-      driveDiagNW();
-    case 7:
-      driveDiagSE();
-    case 8:
-      driveDiagSW();
-    case 9:
-      rotateClock();
-    case 10:
-      rotateCounterClock();
+  if(currDriveMode==1) {
+    driveNorth();
   }
+  else if(currDriveMode==2) {
+    driveSouth();
+  }
+  else if(currDriveMode==3) {
+    driveEast();
+  }
+  else if(currDriveMode==4) {
+    driveWest();
+  }
+  else if(currDriveMode==5) {
+    driveDiagNE();
+  }
+  else if(currDriveMode==6) {
+    driveDiagNW();
+  }
+  else if(currDriveMode==7) {
+    driveDiagSE();
+  }
+  else if(currDriveMode==8) {
+    driveDiagSW();
+  }
+  else if(currDriveMode==9) {
+    rotateClock();
+  }
+  else if(currDriveMode==10) {
+    rotateCounterClock();
+  }
+//  switch (currDriveMode) {
+//    case 1:
+//      driveNorth();
+//      Serial.println(1);
+//    case 2:
+//      driveSouth();
+//      Serial.println(2);
+//    case 3:
+//      driveEast();
+//      Serial.println(3);
+//    case 4:
+//      driveWest();
+//    case 5:
+//      driveDiagNE();
+//    case 6:
+//      driveDiagNW();
+//    case 7:
+//      driveDiagSE();
+//    case 8:
+//      driveDiagSW();
+//    case 9:
+//      rotateClock();
+//    case 10:
+//      rotateCounterClock();
+//  }
 }
 
 void driveNorth(){         //drive straight
