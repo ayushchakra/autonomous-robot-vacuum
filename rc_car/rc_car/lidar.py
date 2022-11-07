@@ -16,7 +16,12 @@ class LidarNode(Node):
 
     def get_usb_port(self):
         available_ports = comports()
-        self.usb_port = ''
+        for port in available_ports:
+            if self.LIDAR_USB_PORT_NAME in port:
+                self.usb_port = port
+                return
+        print("LiDAR not found!")
+        rclpy.shutdown()
 
     def run_loop(self):
         with Sweep(self.usb_port) as sweep:
