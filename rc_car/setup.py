@@ -20,6 +20,8 @@ setup(
     tests_require=['pytest'],
     entry_points={
         'console_scripts': [
+            "receive_message = connection_test.receive_message:main",
+            "send_message = connection_test.send_message:main"
         ],
     },
 )
