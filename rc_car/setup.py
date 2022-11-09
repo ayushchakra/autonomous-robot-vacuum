@@ -21,7 +21,8 @@ setup(
     entry_points={
         'console_scripts': [
             "receive_message = rc_car.connection_test.receive_message:main",
-            "send_message = rc_car.connection_test.send_message:main"
+            "send_message = rc_car.connection_test.send_message:main",
+            "lidar = rc_car.lidar:main"
         ],
     },
 )
