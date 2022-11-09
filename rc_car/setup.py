@@ -22,7 +22,8 @@ setup(
         'console_scripts': [
             "receive_message = rc_car.connection_test.receive_message:main",
             "send_message = rc_car.connection_test.send_message:main",
-            "lidar = rc_car.lidar:main"
+            "send_lidar = rc_car.send_lidar:main",
+            "receive_lidar = rc_car.receive_lidar:main"
         ],
     },
 )

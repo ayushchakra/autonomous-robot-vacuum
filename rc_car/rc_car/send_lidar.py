@@ -12,7 +12,7 @@ class LidarNode(Node):
         self.lidar_pub = self.create_publisher(LaserScan, "scan", 10)
         self.timer = self.create_timer(.1, self.run_loop)
         # self.lidar_port = self.get_usb_port()
-        self.lidar_port = '/dev/ttyUSB1'
+        self.lidar_port = '/dev/ttyUSB0'
         self.scan: LaserScan = None
 
     def get_usb_port(self):
