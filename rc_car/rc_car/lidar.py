@@ -27,7 +27,7 @@ class LidarNode(Node):
     def run_loop(self):
         with Sweep(self.usb_port) as sweep:
             sweep.start_scanning()
-            data = np.array([(point.angle, point.distance) for point in sweep.get_scans()[0]])
+            data = np.array([(point.angle/1000, point.distance) for point in sweep.get_scans()[0]])
             self.scan.angle_max = max(data[:, 0])
             self.scan.angle_min = min(data[:, 0])
             self.scan.angle_increment = (self.scan.angle_max - self.scan.angle_min)/len(data)
