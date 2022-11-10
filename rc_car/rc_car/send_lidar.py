@@ -1,19 +1,21 @@
 import rclpy
 from rclpy.node import Node
-from sensor_msgs.msg import LaserScan
+from std_msgs.msg import Float64MultiArray
 from sweeppy import Sweep
 from serial.tools.list_ports import comports
 import numpy as np
+import pdb
+import time
 
 class LidarNode(Node):
     LIDAR_USB_PORT_NAME = ''
     def __init__(self):
         super().__init__('lidar_node')
-        self.lidar_pub = self.create_publisher(LaserScan, "scan", 10)
+        self.lidar_pub = self.create_publisher(Float64MultiArray, "scan", 10)
         self.timer = self.create_timer(.1, self.run_loop)
         # self.lidar_port = self.get_usb_port()
         self.lidar_port = '/dev/ttyUSB0'
-        self.scan: LaserScan = None
+        self.scan: Float64MultiArray = Float64MultiArray()
 
     def get_usb_port(self):
         available_ports = comports()
@@ -25,14 +27,18 @@ class LidarNode(Node):
         rclpy.shutdown()
 
     def run_loop(self):
-        with Sweep(self.usb_port) as sweep:
+        with Sweep(self.lidar_port) as sweep:
             sweep.start_scanning()
-            data = np.array([sample.distance, sample.angle/1000] for sample in next(sweep.get_scans())[0])
-            self.scan.angle_max = max(data[:, 1])
-            self.scan.angle_min = min(data[:, 1])
-            self.scan.angle_increment = (self.scan.angle_max - self.scan.angle_min)/len(data)
-            self.scan.ranges = data[:,0]
+            record_data = False
+            for scan in sweep.get_scans():
+                angles = [float(sample.angle/1000) for sample in scan[0]]
+                distances = [float(sample.distance) for sample in scan[0]]
+                if record_data:
+                    break
+                record_data = True
+            self.scan.data = distances + angles
         self.lidar_pub.publish(self.scan)
+        print("sent")
 
 def main(args=None):
     rclpy.init(args=args)
