@@ -23,7 +23,9 @@ setup(
             "receive_message = rc_car.connection_test.receive_message:main",
             "send_message = rc_car.connection_test.send_message:main",
             "send_lidar = rc_car.send_lidar:main",
-            "receive_lidar = rc_car.receive_lidar:main"
+            "receive_lidar = rc_car.receive_lidar:main",
+            "send_ip = rc_car.rpi_startup.send_ip_node:main",
+            "receive_ip = rc_car.rpi_startup.receive_ip_node:main"
         ],
     },
 )
