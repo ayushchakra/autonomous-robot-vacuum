@@ -1,35 +1,34 @@
 import RPi.GPIO as GPIO
 import time
-from RpiMotorLib import RpiMotorLib
+# from RpiMotorLib import RpiMotorLib
 
 
-mymotortest = RpiMotorLib.BYJMotor("MyMotorOne", "Nema")
+# mymotortest = RpiMotorLib.BYJMotor("MyMotorOne", "Nema")
 
 # Connect GPIO to [IN1 , IN2 , IN3 ,IN4] on Motor PCB
-GpioPins = [7, 11, 13, 15]
-
-# 
 MOTOR_ONE_PINS = [4, 17, 27, 22]  # [7, 0, 2, 3]
 MOTOR_TWO_PINS = [6, 13, 19, 26]
 MOTOR_THREE_PINS = [21,20,16,12]  # [12,16,20,21]
 MOTOR_FOUR_PINS = [35, 37, 38, 40]
 
 
-
+def setup_pins(motor_pins):
+    for pin in motor_pins:
+        GPIO.setup(pin, GPIO.OUT)
 
 # step 1 - high low high low
-def phase_one(motor_array):
-    GPIO.output(motor_array[0], GPIO.HIGH)
-    GPIO.output(motor_array[1], GPIO.LOW)
-    GPIO.output(motor_array[2], GPIO.HIGH)
-    GPIO.output(motor_array[3], GPIO.LOW)
+def phase_one(motor_pins):
+    GPIO.output(motor_pins[0], GPIO.HIGH)
+    GPIO.output(motor_pins[1], GPIO.LOW)
+    GPIO.output(motor_pins[2], GPIO.HIGH)
+    GPIO.output(motor_pins[3], GPIO.LOW)
 
 # step 2 - low high high low
-def phase_two(motor_array):
-    GPIO.output(motor_array[0], GPIO.LOW)
-    GPIO.output(motor_array[1], GPIO.HIGH)
-    GPIO.output(motor_array[2], GPIO.HIGH)
-    GPIO.output(motor_array[3], GPIO.LOW)
+def phase_two(motor_pins):
+    GPIO.output(motor_pins[0], GPIO.LOW)
+    GPIO.output(motor_pins[1], GPIO.HIGH)
+    GPIO.output(motor_pins[2], GPIO.HIGH)
+    GPIO.output(motor_pins[3], GPIO.LOW)
 
 # step 3 - low high low high
 def phase_three(motor_array):
@@ -39,22 +38,21 @@ def phase_three(motor_array):
     GPIO.output(motor_array[3], GPIO.HIGH)
 
 # step 4 - high low low high
-def phase_four(motor_array):
-    GPIO.output(motor_array[0], GPIO.HIGH)
-    GPIO.output(motor_array[1], GPIO.LOW)
-    GPIO.output(motor_array[2], GPIO.LOW)
-    GPIO.output(motor_array[3], GPIO.HIGH)
+def phase_four(motor_pins):
+    GPIO.output(motor_pins[0], GPIO.HIGH)
+    GPIO.output(motor_pins[1], GPIO.LOW)
+    GPIO.output(motor_pins[2], GPIO.LOW)
+    GPIO.output(motor_pins[3], GPIO.HIGH)
 
 
 def main():
     """
     main function loop.
     """
-    for pin in MOTOR_ONE_PINS:
-        GPIO.setup(pin, GPIO.OUT)
-    
-    for pin in MOTOR_THREE_PINS:
-        GPIO.setup(pin, GPIO.OUT)
+    setup_pins(MOTOR_ONE_PINS)
+    setup_pins(MOTOR_TWO_PINS)
+    setup_pins(MOTOR_THREE_PINS)
+    setup_pins(MOTOR_FOUR_PINS)
     
     for i in range(100):
         phase_one(MOTOR_ONE_PINS)
