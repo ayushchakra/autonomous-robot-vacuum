@@ -1,6 +1,6 @@
 import RPi.GPIO as GPIO
 import time
-import stepper_helpers
+from stepper_helpers import setup_pins, phase_one, phase_two, phase_three, phase_four
 
 
 # Connect GPIO to [IN1 , IN2 , IN3 ,IN4] on Motor PCB
@@ -19,23 +19,52 @@ TIME_SLEEP = 0.002
 GPIO.setmode(GPIO.BCM)
 
 
+setup_pins(MOTOR_ONE_PINS)
+setup_pins(MOTOR_TWO_PINS)
+setup_pins(MOTOR_THREE_PINS)
+setup_pins(MOTOR_FOUR_PINS)
+
+
+
+def run_motors(motor_one_pins, motor_two_pins, motor_three_pins, motor_four_pins, time_sleep, revolutions):
+    '''
+    runs all four motors, should be used to test them
+    '''
+    for i in range(revolutions):
+        phase_one(motor_one_pins)
+        phase_one(motor_two_pins)
+        phase_one(motor_three_pins)
+        phase_one(motor_four_pins)
+        time.sleep(time_sleep)
+        
+        phase_two(motor_one_pins)
+        phase_two(motor_two_pins)
+        phase_two(motor_three_pins)
+        phase_two(motor_four_pins)
+        time.sleep(time_sleep)
+        
+        phase_three(motor_one_pins)
+        phase_three(motor_two_pins)
+        phase_three(motor_three_pins)
+        phase_three(motor_four_pins)
+        time.sleep(time_sleep)
+        
+        phase_four(motor_one_pins)
+        phase_four(motor_two_pins)
+        phase_four(motor_three_pins)
+        phase_four(motor_four_pins)
+        time.sleep(time_sleep)
 
 
 
 
-def main():
-    """
-    main function loop.
-    """
-    setup_pins(MOTOR_ONE_PINS)
-    setup_pins(MOTOR_TWO_PINS)
-    setup_pins(MOTOR_THREE_PINS)
-    setup_pins(MOTOR_FOUR_PINS)
-    
-    stepper_helpers.run_motors(MOTOR_ONE_PINS, MOTOR_ONE_PINS, MOTOR_ONE_PINS, MOTOR_ONE_PINS, TIME_SLEEP, 1000):
 
 
 
 
-main()
+
+# this is the function that shuold be called in the lidar sensing code. Or, run the loop in here and constantly read inputs from the lidar
+run_motors(MOTOR_ONE_PINS, MOTOR_ONE_PINS, MOTOR_ONE_PINS, MOTOR_ONE_PINS, TIME_SLEEP, 1000)
+
+
 GPIO.cleanup()

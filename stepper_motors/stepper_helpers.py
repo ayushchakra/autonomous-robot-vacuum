@@ -7,97 +7,89 @@ import time
 
 
 
-def _setup_pins(motor_pins):
+def setup_pins(motor_pins):
     for pin in motor_pins:
         GPIO.setup(pin, GPIO.OUT)
 
+
 # step 1 - high low high low
-def _phase_one(motor_pins):
+def phase_one(motor_pins):
     GPIO.output(motor_pins[0], GPIO.HIGH)
     GPIO.output(motor_pins[1], GPIO.LOW)
     GPIO.output(motor_pins[2], GPIO.HIGH)
     GPIO.output(motor_pins[3], GPIO.LOW)
 
 # step 2 - low high high low
-def _phase_two(motor_pins):
+def phase_two(motor_pins):
     GPIO.output(motor_pins[0], GPIO.LOW)
     GPIO.output(motor_pins[1], GPIO.HIGH)
     GPIO.output(motor_pins[2], GPIO.HIGH)
     GPIO.output(motor_pins[3], GPIO.LOW)
 
 # step 3 - low high low high
-def _phase_three(motor_pins):
+def phase_three(motor_pins):
     GPIO.output(motor_pins[0], GPIO.LOW)
     GPIO.output(motor_pins[1], GPIO.HIGH)
     GPIO.output(motor_pins[2], GPIO.LOW)
     GPIO.output(motor_pins[3], GPIO.HIGH)
 
 # step 4 - high low low high
-def _phase_four(motor_pins):
+def phase_four(motor_pins):
     GPIO.output(motor_pins[0], GPIO.HIGH)
     GPIO.output(motor_pins[1], GPIO.LOW)
     GPIO.output(motor_pins[2], GPIO.LOW)
     GPIO.output(motor_pins[3], GPIO.HIGH)
 
 
-def run_motors(motor_one_pins, motor_two_pins, motor_three_pins, motor_four_pins, time_sleep, revolutions):
-    '''
-    runs all four motors, should be used to test them
-    '''
-    for i in range(revolutions):
-        phase_one(motor_one_pins)
-        phase_one(motor_two_pins)
-        phase_one(motor_three_pins)
-        phase_one(motor_four_pins)
-        time.sleep(time_sleep)
-        
-        phase_two(motor_one_pins)
-        phase_two(motor_two_pins)
-        phase_two(motor_three_pins)
-        phase_two(motor_four_pins)
-        time.sleep(time_sleep)
-        
-        phase_three(motor_one_pins)
-        phase_three(motor_two_pins)
-        phase_three(motor_three_pins)
-        phase_three(motor_four_pins)
-        time.sleep(time_sleep)
-        
-        phase_four(motor_one_pins)
-        phase_four(motor_two_pins)
-        phase_four(motor_three_pins)
-        phase_four(motor_four_pins)
-        time.sleep(time_sleep)
-
 
 # functions for robot movement
 def drive_north():
     # read sensor value here
-    # change step times for each wheel to accomodate for it
+    # all wheels at the same speed, and moves forward
+    pass
 
 
 def drive_south():
     # read sensor value here
+    # all wheels at the same speed, and moves backwards
+    pass
 
 
 def drive_east():
     # read sensor values here
+    # all wheels at the same speed, front right/back left go backwards, and other two go forwards
+    pass
+
     
 def drive_west():
     # read sensor values here
+    # all wheels at the same speed, front right/back left go forwards, other two go backwards
+    pass
+
 
 def drive_diag_NE():
     # read sensor values here
+    # all wheels move forwards, front right/back left don't move, front left/back right move at same speeds
+    pass
 
 
 def drive_diag_NW():
     # read sensor values here
+    # all wheels move forwards, front right/back left move at same speeds, front left/back right don't move
+    pass
+
 
 def drive_diag_SW():
     # read sensor values here
+    # front right and back left motors don't move. front left and back right move at the same speeds and Bacjwards.
+    pass
+
 
 def drive_diag_SE():
     # read sensor values here
+    # front right and back left motors move at speeds and bakcwards. Other two don't move
+    pass
+
 
 
 
