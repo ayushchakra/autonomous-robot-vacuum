@@ -238,6 +238,7 @@ setup_pins(MOTOR_FOUR_PINS)
 
 print("running")
 run_motors(MOTOR_ONE_PINS, MOTOR_TWO_PINS, MOTOR_THREE_PINS, MOTOR_FOUR_PINS, 0.002, 500)
+time.sleep(1)
 print("reversing")
 reverse_motors(MOTOR_ONE_PINS, MOTOR_TWO_PINS, MOTOR_THREE_PINS, MOTOR_FOUR_PINS, 0.002, 500)
 
