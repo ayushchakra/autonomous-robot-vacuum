@@ -142,7 +142,7 @@ def reverse_motors(motor_one_pins, motor_two_pins, motor_three_pins, motor_four_
 def drive_north():
     # read sensor value here
     # all wheels at the same speed, and moves forward
-    for i in range(10):
+    for _ in range(100):
         phase_one_reversed(MOTOR_ONE_PINS)
         phase_one(MOTOR_TWO_PINS)
         phase_one_reversed(MOTOR_THREE_PINS)
@@ -171,165 +171,172 @@ def drive_north():
 def drive_south():
     # read sensor value here
     # all wheels at the same speed, and moves backwards
-    phase_one_reversed(MOTOR_ONE_PINS)
-    phase_one_reversed(MOTOR_TWO_PINS)
-    phase_one_reversed(MOTOR_THREE_PINS)
-    phase_one_reversed(MOTOR_FOUR_PINS)
-    time.sleep(time_sleep)
-    
-    phase_two(MOTOR_ONE_PINS)
-    phase_two(MOTOR_TWO_PINS)
-    phase_two(MOTOR_THREE_PINS)
-    phase_two(MOTOR_FOUR_PINS)
-    time.sleep(time_sleep)
-    
-    phase_three_reversed(MOTOR_ONE_PINS)
-    phase_three_reversed(MOTOR_TWO_PINS)
-    phase_three_reversed(MOTOR_THREE_PINS)
-    phase_three_reversed(MOTOR_FOUR_PINS)
-    time.sleep(time_sleep)
-    
-    phase_four(MOTOR_ONE_PINS)
-    phase_four(MOTOR_TWO_PINS)
-    phase_four(MOTOR_THREE_PINS)
-    phase_four(MOTOR_FOUR_PINS)
-    time.sleep(time_sleep)
+    for _ in range(100):
+        phase_one(MOTOR_ONE_PINS)
+        phase_one_reversed(MOTOR_TWO_PINS)
+        phase_one(MOTOR_THREE_PINS)
+        phase_one_reversed(MOTOR_FOUR_PINS)
+        time.sleep(time_sleep)
+        
+        phase_two(MOTOR_ONE_PINS)
+        phase_two(MOTOR_TWO_PINS)
+        phase_two(MOTOR_THREE_PINS)
+        phase_two(MOTOR_FOUR_PINS)
+        time.sleep(time_sleep)
+        
+        phase_three(MOTOR_ONE_PINS)
+        phase_three_reversed(MOTOR_TWO_PINS)
+        phase_three(MOTOR_THREE_PINS)
+        phase_three_reversed(MOTOR_FOUR_PINS)
+        time.sleep(time_sleep)
+        
+        phase_four(MOTOR_ONE_PINS)
+        phase_four(MOTOR_TWO_PINS)
+        phase_four(MOTOR_THREE_PINS)
+        phase_four(MOTOR_FOUR_PINS)
+        time.sleep(time_sleep)
 
 
 def drive_east():
     # read sensor values here
     # all wheels at the same speed, front right/back left go backwards, and other two go forwards
-    phase_one(MOTOR_ONE_PINS)
-    phase_one_reversed(MOTOR_TWO_PINS)
-    phase_one_reversed(MOTOR_THREE_PINS)
-    phase_one(MOTOR_FOUR_PINS)
-    time.sleep(time_sleep)
-    
-    phase_two(MOTOR_ONE_PINS)
-    phase_two(MOTOR_TWO_PINS)
-    phase_two(MOTOR_THREE_PINS)
-    phase_two(MOTOR_FOUR_PINS)
-    time.sleep(time_sleep)
-    
-    phase_three(MOTOR_ONE_PINS)
-    phase_three_reversed(MOTOR_TWO_PINS)
-    phase_three_reversed(MOTOR_THREE_PINS)
-    phase_three(MOTOR_FOUR_PINS)
-    time.sleep(time_sleep)
-    
-    phase_four(MOTOR_ONE_PINS)
-    phase_four(MOTOR_TWO_PINS)
-    phase_four(MOTOR_THREE_PINS)
-    phase_four(MOTOR_FOUR_PINS)
-    time.sleep(time_sleep)
+    for _ in range(100):
+        phase_one_reversed(MOTOR_ONE_PINS)
+        phase_one_reversed(MOTOR_TWO_PINS)
+        phase_one(MOTOR_THREE_PINS)
+        phase_one(MOTOR_FOUR_PINS)
+        time.sleep(time_sleep)
+        
+        phase_two(MOTOR_ONE_PINS)
+        phase_two(MOTOR_TWO_PINS)
+        phase_two(MOTOR_THREE_PINS)
+        phase_two(MOTOR_FOUR_PINS)
+        time.sleep(time_sleep)
+        
+        phase_three_reversed(MOTOR_ONE_PINS)
+        phase_three_reversed(MOTOR_TWO_PINS)
+        phase_three(MOTOR_THREE_PINS)
+        phase_three(MOTOR_FOUR_PINS)
+        time.sleep(time_sleep)
+        
+        phase_four(MOTOR_ONE_PINS)
+        phase_four(MOTOR_TWO_PINS)
+        phase_four(MOTOR_THREE_PINS)
+        phase_four(MOTOR_FOUR_PINS)
+        time.sleep(time_sleep)
 
     
 def drive_west():
     # read sensor values here
     # all wheels at the same speed, front right/back left go forwards, other two go backwards
-    phase_one_reversed(MOTOR_ONE_PINS)
-    phase_one(MOTOR_TWO_PINS)
-    phase_one(MOTOR_THREE_PINS)
-    phase_one_reversed(MOTOR_FOUR_PINS)
-    time.sleep(time_sleep)
-    
-    phase_two(MOTOR_ONE_PINS)
-    phase_two(MOTOR_TWO_PINS)
-    phase_two(MOTOR_THREE_PINS)
-    phase_two(MOTOR_FOUR_PINS)
-    time.sleep(time_sleep)
-    
-    phase_three_reversed(MOTOR_ONE_PINS)
-    phase_three(MOTOR_TWO_PINS)
-    phase_three(MOTOR_THREE_PINS)
-    phase_three_reversed(MOTOR_FOUR_PINS)
-    time.sleep(time_sleep)
-    
-    phase_four(MOTOR_ONE_PINS)
-    phase_four(MOTOR_TWO_PINS)
-    phase_four(MOTOR_THREE_PINS)
-    phase_four(MOTOR_FOUR_PINS)
-    time.sleep(time_sleep)
+    for _ in range(100):
+        phase_one(MOTOR_ONE_PINS)
+        phase_one(MOTOR_TWO_PINS)
+        phase_one_reversed(MOTOR_THREE_PINS)
+        phase_one_reversed(MOTOR_FOUR_PINS)
+        time.sleep(time_sleep)
+        
+        phase_two(MOTOR_ONE_PINS)
+        phase_two(MOTOR_TWO_PINS)
+        phase_two(MOTOR_THREE_PINS)
+        phase_two(MOTOR_FOUR_PINS)
+        time.sleep(time_sleep)
+        
+        phase_three(MOTOR_ONE_PINS)
+        phase_three(MOTOR_TWO_PINS)
+        phase_three_reversed(MOTOR_THREE_PINS)
+        phase_three_reversed(MOTOR_FOUR_PINS)
+        time.sleep(time_sleep)
+        
+        phase_four(MOTOR_ONE_PINS)
+        phase_four(MOTOR_TWO_PINS)
+        phase_four(MOTOR_THREE_PINS)
+        phase_four(MOTOR_FOUR_PINS)
+        time.sleep(time_sleep)
 
 
 def drive_diag_NE():
     # read sensor values here
     # front right/back left don't move, front left/back right move forward
-    phase_one(MOTOR_ONE_PINS)
-    phase_one(MOTOR_FOUR_PINS)
-    time.sleep(time_sleep)
-    
-    phase_two(MOTOR_ONE_PINS)
-    phase_two(MOTOR_FOUR_PINS)
-    time.sleep(time_sleep)
-    
-    phase_three(MOTOR_ONE_PINS)
-    phase_three(MOTOR_FOUR_PINS)
-    time.sleep(time_sleep)
-    
-    phase_four(MOTOR_ONE_PINS)
-    phase_four(MOTOR_FOUR_PINS)
-    time.sleep(time_sleep)
+    for _ in range(100):
+        phase_one_reversed(MOTOR_ONE_PINS)
+        phase_one(MOTOR_FOUR_PINS)
+        time.sleep(time_sleep)
+        
+        phase_two(MOTOR_ONE_PINS)
+        phase_two(MOTOR_FOUR_PINS)
+        time.sleep(time_sleep)
+        
+        phase_three_reversed(MOTOR_ONE_PINS)
+        phase_three(MOTOR_FOUR_PINS)
+        time.sleep(time_sleep)
+        
+        phase_four(MOTOR_ONE_PINS)
+        phase_four(MOTOR_FOUR_PINS)
+        time.sleep(time_sleep)
 
 
 def drive_diag_NW():
     # read sensor values here
     # front right/back left move forwards, front left/back right don't move
-    phase_one(MOTOR_TWO_PINS)
-    phase_one(MOTOR_THREE_PINS)
-    time.sleep(time_sleep)
-    
-    phase_two(MOTOR_TWO_PINS)
-    phase_two(MOTOR_THREE_PINS)
-    time.sleep(time_sleep)
-    
-    phase_three(MOTOR_TWO_PINS)
-    phase_three(MOTOR_THREE_PINS)
-    time.sleep(time_sleep)
-    
-    phase_four(MOTOR_TWO_PINS)
-    phase_four(MOTOR_THREE_PINS)
-    time.sleep(time_sleep)
+    for _ in range(100):
+        phase_one(MOTOR_TWO_PINS)
+        phase_one_reversed(MOTOR_THREE_PINS)
+        time.sleep(time_sleep)
+        
+        phase_two(MOTOR_TWO_PINS)
+        phase_two(MOTOR_THREE_PINS)
+        time.sleep(time_sleep)
+        
+        phase_three(MOTOR_TWO_PINS)
+        phase_three_reversed(MOTOR_THREE_PINS)
+        time.sleep(time_sleep)
+        
+        phase_four(MOTOR_TWO_PINS)
+        phase_four(MOTOR_THREE_PINS)
+        time.sleep(time_sleep)
 
 
 def drive_diag_SW():
     # read sensor values here
     # front right and back left motors don't move. front left and back right move at the same speeds and Bacjwards.
-    phase_one_reversed(MOTOR_ONE_PINS)
-    phase_one_reversed(MOTOR_FOUR_PINS)
-    time.sleep(time_sleep)
-    
-    phase_two(MOTOR_ONE_PINS)
-    phase_two(MOTOR_FOUR_PINS)
-    time.sleep(time_sleep)
-    
-    phase_three_reversed(MOTOR_ONE_PINS)
-    phase_three_reversed(MOTOR_FOUR_PINS)
-    time.sleep(time_sleep)
-    
-    phase_four(MOTOR_ONE_PINS)
-    phase_four(MOTOR_FOUR_PINS)
-    time.sleep(time_sleep)
+    for _ in range(100):
+        phase_one(MOTOR_ONE_PINS)
+        phase_one_reversed(MOTOR_FOUR_PINS)
+        time.sleep(time_sleep)
+        
+        phase_two(MOTOR_ONE_PINS)
+        phase_two(MOTOR_FOUR_PINS)
+        time.sleep(time_sleep)
+        
+        phase_three(MOTOR_ONE_PINS)
+        phase_three_reversed(MOTOR_FOUR_PINS)
+        time.sleep(time_sleep)
+        
+        phase_four(MOTOR_ONE_PINS)
+        phase_four(MOTOR_FOUR_PINS)
+        time.sleep(time_sleep)
 
 
 def drive_diag_SE():
     # read sensor values here
     # front right and back left motors move at speeds and bakcwards. Other two don't move
-    phase_one_reversed(MOTOR_TWO_PINS)
-    phase_one_reversed(MOTOR_THREE_PINS)
-    time.sleep(time_sleep)
-    
-    phase_two(MOTOR_TWO_PINS)
-    phase_two(MOTOR_THREE_PINS)
-    time.sleep(time_sleep)
-    
-    phase_three_reversed(MOTOR_TWO_PINS)
-    phase_three_reversed(MOTOR_THREE_PINS)
-    time.sleep(time_sleep)
-    
-    phase_four(MOTOR_TWO_PINS)
-    phase_four(MOTOR_THREE_PINS)
-    time.sleep(time_sleep)
+    for _ in range(100):
+        phase_one_reversed(MOTOR_TWO_PINS)
+        phase_one(MOTOR_THREE_PINS)
+        time.sleep(time_sleep)
+        
+        phase_two(MOTOR_TWO_PINS)
+        phase_two(MOTOR_THREE_PINS)
+        time.sleep(time_sleep)
+        
+        phase_three_reversed(MOTOR_TWO_PINS)
+        phase_three(MOTOR_THREE_PINS)
+        time.sleep(time_sleep)
+        
+        phase_four(MOTOR_TWO_PINS)
+        phase_four(MOTOR_THREE_PINS)
+        time.sleep(time_sleep)
 
 
 def rotate_clock():
