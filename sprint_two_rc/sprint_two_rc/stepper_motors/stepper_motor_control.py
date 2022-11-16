@@ -140,29 +140,30 @@ def reverse_motors(motor_one_pins, motor_two_pins, motor_three_pins, motor_four_
 def drive_north():
     # read sensor value here
     # all wheels at the same speed, and moves forward
-    phase_one(MOTOR_ONE_PINS)
-    phase_one(MOTOR_TWO_PINS)
-    phase_one(MOTOR_THREE_PINS)
-    phase_one(MOTOR_FOUR_PINS)
-    time.sleep(time_sleep)
+    # phase_one(MOTOR_ONE_PINS)
+    # phase_one(MOTOR_TWO_PINS)
+    # phase_one(MOTOR_THREE_PINS)
+    # phase_one(MOTOR_FOUR_PINS)
+    # time.sleep(time_sleep)
     
-    phase_two(MOTOR_ONE_PINS)
-    phase_two(MOTOR_TWO_PINS)
-    phase_two(MOTOR_THREE_PINS)
-    phase_two(MOTOR_FOUR_PINS)
-    time.sleep(time_sleep)
+    # phase_two(MOTOR_ONE_PINS)
+    # phase_two(MOTOR_TWO_PINS)
+    # phase_two(MOTOR_THREE_PINS)
+    # phase_two(MOTOR_FOUR_PINS)
+    # time.sleep(time_sleep)
     
-    phase_three(MOTOR_ONE_PINS)
-    phase_three(MOTOR_TWO_PINS)
-    phase_three(MOTOR_THREE_PINS)
-    phase_three(MOTOR_FOUR_PINS)
-    time.sleep(time_sleep)
+    # phase_three(MOTOR_ONE_PINS)
+    # phase_three(MOTOR_TWO_PINS)
+    # phase_three(MOTOR_THREE_PINS)
+    # phase_three(MOTOR_FOUR_PINS)
+    # time.sleep(time_sleep)
     
-    phase_four(MOTOR_ONE_PINS)
-    phase_four(MOTOR_TWO_PINS)
-    phase_four(MOTOR_THREE_PINS)
-    phase_four(MOTOR_FOUR_PINS)
-    time.sleep(time_sleep)
+    # phase_four(MOTOR_ONE_PINS)
+    # phase_four(MOTOR_TWO_PINS)
+    # phase_four(MOTOR_THREE_PINS)
+    # phase_four(MOTOR_FOUR_PINS)
+    # time.sleep(time_sleep)
+    print('north')
 
 
 def drive_south():
@@ -387,15 +388,15 @@ def rotate_counter_clock():
 
 
 
-
-# we're using the GPIO numbering system, not the board
-GPIO.setmode(GPIO.BCM)
-
-
 setup_pins(MOTOR_ONE_PINS)
 setup_pins(MOTOR_TWO_PINS)
 setup_pins(MOTOR_THREE_PINS)
 setup_pins(MOTOR_FOUR_PINS)
+
+
+# we're using the GPIO numbering system, not the board
+GPIO.setmode(GPIO.BCM)
+
 
 
 print("running")
