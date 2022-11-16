@@ -142,29 +142,30 @@ def reverse_motors(motor_one_pins, motor_two_pins, motor_three_pins, motor_four_
 def drive_north():
     # read sensor value here
     # all wheels at the same speed, and moves forward
-    phase_one(MOTOR_ONE_PINS)
-    phase_one(MOTOR_TWO_PINS)
-    phase_one(MOTOR_THREE_PINS)
-    phase_one(MOTOR_FOUR_PINS)
-    time.sleep(time_sleep)
+    for i in range(10):
+        phase_one(MOTOR_ONE_PINS)
+        phase_one(MOTOR_TWO_PINS)
+        phase_one(MOTOR_THREE_PINS)
+        phase_one(MOTOR_FOUR_PINS)
+        time.sleep(time_sleep)
     
-    phase_two(MOTOR_ONE_PINS)
-    phase_two(MOTOR_TWO_PINS)
-    phase_two(MOTOR_THREE_PINS)
-    phase_two(MOTOR_FOUR_PINS)
-    time.sleep(time_sleep)
+        phase_two(MOTOR_ONE_PINS)
+        phase_two(MOTOR_TWO_PINS)
+        phase_two(MOTOR_THREE_PINS)
+        phase_two(MOTOR_FOUR_PINS)
+        time.sleep(time_sleep)
     
-    phase_three(MOTOR_ONE_PINS)
-    phase_three(MOTOR_TWO_PINS)
-    phase_three(MOTOR_THREE_PINS)
-    phase_three(MOTOR_FOUR_PINS)
-    time.sleep(time_sleep)
+        phase_three(MOTOR_ONE_PINS)
+        phase_three(MOTOR_TWO_PINS)
+        phase_three(MOTOR_THREE_PINS)
+        phase_three(MOTOR_FOUR_PINS)
+        time.sleep(time_sleep)
     
-    phase_four(MOTOR_ONE_PINS)
-    phase_four(MOTOR_TWO_PINS)
-    phase_four(MOTOR_THREE_PINS)
-    phase_four(MOTOR_FOUR_PINS)
-    time.sleep(time_sleep)
+        phase_four(MOTOR_ONE_PINS)
+        phase_four(MOTOR_TWO_PINS)
+        phase_four(MOTOR_THREE_PINS)
+        phase_four(MOTOR_FOUR_PINS)
+        time.sleep(time_sleep)
 
 
 def drive_south():
