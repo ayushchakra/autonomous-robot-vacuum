@@ -7,7 +7,7 @@ class SimpleReceiveTeleop(Node):
     def __init__(self):
         super().__init__('simple_receive_teleop')
         self.subscriber = self.create_subscription(String, 'vel_dir', self.process_keyboard_input, 10)
-        # setup_all_pins()
+        setup_all_pins()
 
     def process_keyboard_input(self, msg: String):
         print(msg.data)
