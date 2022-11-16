@@ -22,7 +22,7 @@ ax.set_xbound(lower=-250, upper=250)
 ax.set_ybound(lower=-250, upper=250)
 
 for i, scan in enumerate(lidar.iter_scans()):
-    print('%d: Got %d measurments' % (i, len(scan)))
+    print(scan)
     angles = [point[1] for point in scan]
     dists = [point[2]/10 for point in scan]
 
