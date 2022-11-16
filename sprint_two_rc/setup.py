@@ -22,7 +22,8 @@ setup(
         'console_scripts': [
             'send_teleop = sprint_two_rc.send_teleop:main',
             'simple_send_teleop = sprint_two_rc.simple_send_teleop:main',
-            'simple_receive_teleop = sprint_two_rc.simple_receive_teleop:main'
+            'simple_receive_teleop = sprint_two_rc.simple_receive_teleop:main',
+            'obstacle_avoidance = sprint_two_rc.obstacle_avoidance:main',
         ],
     },
 )
