@@ -13,15 +13,17 @@ MOTOR_FOUR_PINS = [6, 13, 19, 26]   # back right
 # represents the sleep time (directly correlating to the wheel speed)
 time_sleep = 0.002
 
-
-
-
-
-
 def setup_pins(motor_pins):
     for pin in motor_pins:
         GPIO.setup(pin, GPIO.OUT)
 
+def setup_all_pins():
+    # we're using the GPIO numbering system, not the board
+    GPIO.setmode(GPIO.BCM)
+    setup_pins(MOTOR_ONE_PINS)
+    setup_pins(MOTOR_TWO_PINS)
+    setup_pins(MOTOR_THREE_PINS)
+    setup_pins(MOTOR_FOUR_PINS)
 
 # step 1 - high low high low
 def phase_one(motor_pins):
@@ -388,22 +390,11 @@ def rotate_counter_clock():
 
 
 
-setup_pins(MOTOR_ONE_PINS)
-setup_pins(MOTOR_TWO_PINS)
-setup_pins(MOTOR_THREE_PINS)
-setup_pins(MOTOR_FOUR_PINS)
-
-
-# we're using the GPIO numbering system, not the board
-GPIO.setmode(GPIO.BCM)
-
-
-
-print("running")
-run_motors(MOTOR_ONE_PINS, MOTOR_TWO_PINS, MOTOR_THREE_PINS, MOTOR_FOUR_PINS, 0.002, 500)
-time.sleep(1)
-print("reversing")
-reverse_motors(MOTOR_ONE_PINS, MOTOR_TWO_PINS, MOTOR_THREE_PINS, MOTOR_FOUR_PINS, 0.002, 500)
+# print("running")
+# run_motors(MOTOR_ONE_PINS, MOTOR_TWO_PINS, MOTOR_THREE_PINS, MOTOR_FOUR_PINS, 0.002, 500)
+# time.sleep(1)
+# print("reversing")
+# reverse_motors(MOTOR_ONE_PINS, MOTOR_TWO_PINS, MOTOR_THREE_PINS, MOTOR_FOUR_PINS, 0.002, 500)
 
 # for i in range(10000):
 #     run_motors(MOTOR_ONE_PINS, MOTOR_TWO_PINS, MOTOR_THREE_PINS, MOTOR_FOUR_PINS, TIME_SLEEP, 1000)
@@ -416,7 +407,7 @@ reverse_motors(MOTOR_ONE_PINS, MOTOR_TWO_PINS, MOTOR_THREE_PINS, MOTOR_FOUR_PINS
 
 
 
-GPIO.cleanup()
+# GPIO.cleanup()
 
 
 
