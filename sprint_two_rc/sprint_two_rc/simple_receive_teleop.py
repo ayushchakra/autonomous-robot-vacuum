@@ -1,15 +1,16 @@
 import rclpy
 from rclpy.node import Node
-from std_msgs.msg import Char
+from std_msgs.msg import String
 from .stepper_motors.stepper_motor_control import *
 
 class SimpleReceiveTeleop(Node):
     def __init__(self):
         super().__init__('simple_receive_teleop')
-        self.subscriber = self.create_subscription(Char, 'vel_dir', self.process_keyboard_input, 10)
-        setup_all_pins()
+        self.subscriber = self.create_subscription(String, 'vel_dir', self.process_keyboard_input, 10)
+        # setup_all_pins()
 
-    def process_keybaord_input(self, msg: Char):
+    def process_keyboard_input(self, msg: String):
+        print(msg.data)
         if msg.data == 'q':
             drive_diag_NW()
         elif msg.data == 'w':
