@@ -11,7 +11,7 @@ MOTOR_FOUR_PINS = [18, 23, 24, 25]  # back right
 
 # 0.0005 is the minimum time difference i've seen
 # represents the sleep time (directly correlating to the wheel speed)
-time_sleep = 0.002
+time_sleep = 0.004
 
 def setup_pins(motor_pins):
     for pin in motor_pins:
@@ -142,7 +142,7 @@ def reverse_motors(motor_one_pins, motor_two_pins, motor_three_pins, motor_four_
 def drive_north():
     # read sensor value here
     # all wheels at the same speed, and moves forward
-    for i in range(10):
+    for i in range(100):
         phase_one_reversed(MOTOR_ONE_PINS)
         phase_one(MOTOR_TWO_PINS)
         phase_one_reversed(MOTOR_THREE_PINS)
