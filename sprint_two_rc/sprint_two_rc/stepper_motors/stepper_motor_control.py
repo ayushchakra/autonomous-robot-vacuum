@@ -143,9 +143,9 @@ def drive_north():
     # read sensor value here
     # all wheels at the same speed, and moves forward
     for i in range(10):
-        phase_one(MOTOR_ONE_PINS)
+        phase_one_reversed(MOTOR_ONE_PINS)
         phase_one(MOTOR_TWO_PINS)
-        phase_one(MOTOR_THREE_PINS)
+        phase_one_reversed(MOTOR_THREE_PINS)
         phase_one(MOTOR_FOUR_PINS)
         time.sleep(time_sleep)
     
@@ -155,9 +155,9 @@ def drive_north():
         phase_two(MOTOR_FOUR_PINS)
         time.sleep(time_sleep)
     
-        phase_three(MOTOR_ONE_PINS)
+        phase_three_reversed(MOTOR_ONE_PINS)
         phase_three(MOTOR_TWO_PINS)
-        phase_three(MOTOR_THREE_PINS)
+        phase_three_reversed(MOTOR_THREE_PINS)
         phase_three(MOTOR_FOUR_PINS)
         time.sleep(time_sleep)
     
