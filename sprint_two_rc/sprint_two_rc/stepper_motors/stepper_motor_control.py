@@ -3,10 +3,10 @@ import time
 
 
 # Connect GPIO to [IN1 , IN2 , IN3 ,IN4] on Motor PCB
-MOTOR_ONE_PINS = [4, 17, 27, 22]    # front left
-MOTOR_TWO_PINS = [18, 23, 24, 25]   # front right
-MOTOR_THREE_PINS = [21,20,16,12]    # back left
-MOTOR_FOUR_PINS = [6, 13, 19, 26]   # back right
+MOTOR_ONE_PINS = [6, 13, 19, 26]    # front left
+MOTOR_TWO_PINS = [21, 20, 16, 12]   # front right
+MOTOR_THREE_PINS = [4, 17, 27, 22]  # back left
+MOTOR_FOUR_PINS = [18, 23, 24, 25]  # back right
 
 
 # 0.0005 is the minimum time difference i've seen
@@ -82,10 +82,10 @@ def run_motors(motor_one_pins, motor_two_pins, motor_three_pins, motor_four_pins
     runs all four motors, should be used to test them
     '''
     for i in range(revolutions):
-        phase_one(motor_one_pins)
-        phase_one(motor_two_pins)
-        phase_one(motor_three_pins)
-        phase_one(motor_four_pins)
+        phase_one_reversed(motor_one_pins)
+        phase_one_reversed(motor_two_pins)
+        phase_one_reversed(motor_three_pins)
+        phase_one_reversed(motor_four_pins)
         time.sleep(time_sleep)
         
         phase_two(motor_one_pins)
@@ -94,10 +94,10 @@ def run_motors(motor_one_pins, motor_two_pins, motor_three_pins, motor_four_pins
         phase_two(motor_four_pins)
         time.sleep(time_sleep)
         
-        phase_three(motor_one_pins)
-        phase_three(motor_two_pins)
-        phase_three(motor_three_pins)
-        phase_three(motor_four_pins)
+        phase_three_reversed(motor_one_pins)
+        phase_three_reversed(motor_two_pins)
+        phase_three_reversed(motor_three_pins)
+        phase_three_reversed(motor_four_pins)
         time.sleep(time_sleep)
         
         phase_four(motor_one_pins)
