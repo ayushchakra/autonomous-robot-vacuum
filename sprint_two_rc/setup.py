@@ -20,7 +20,9 @@ setup(
     tests_require=['pytest'],
     entry_points={
         'console_scripts': [
-            'send_teleop = sprint_two_rc.send_teleop:main'
+            'send_teleop = sprint_two_rc.send_teleop:main',
+            'simple_send_teleop = sprint_two_rc.simple_send_teleop:main',
+            'simple_receive_teleop = sprint_two_rc.simple_receive_teleop:main'
         ],
     },
 )
