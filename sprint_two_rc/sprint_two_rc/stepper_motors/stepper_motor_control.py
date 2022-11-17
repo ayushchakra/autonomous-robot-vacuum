@@ -202,9 +202,9 @@ def drive_east():
     # read sensor values here
     # all wheels at the same speed, front right/back left go backwards, and other two go forwards
     for _ in range(NUM_STEPS_PER_CMD):
-        phase_one_reversed(MOTOR_ONE_PINS)
+        phase_one(MOTOR_ONE_PINS)
         phase_one_reversed(MOTOR_TWO_PINS)
-        phase_one(MOTOR_THREE_PINS)
+        phase_one_reversed(MOTOR_THREE_PINS)
         phase_one(MOTOR_FOUR_PINS)
         time.sleep(time_sleep)
         
@@ -214,9 +214,9 @@ def drive_east():
         phase_two(MOTOR_FOUR_PINS)
         time.sleep(time_sleep)
         
-        phase_three_reversed(MOTOR_ONE_PINS)
+        phase_three(MOTOR_ONE_PINS)
         phase_three_reversed(MOTOR_TWO_PINS)
-        phase_three(MOTOR_THREE_PINS)
+        phase_three_reversed(MOTOR_THREE_PINS)
         phase_three(MOTOR_FOUR_PINS)
         time.sleep(time_sleep)
         

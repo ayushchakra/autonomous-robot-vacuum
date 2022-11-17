@@ -1,7 +1,9 @@
 import rclpy
 from rclpy.node import Node
-from .stepper_motors.stepper_motor_control import *
-from rplidar import RPLidar, RPLidarException
+# from .stepper_motors.stepper_motor_control import *
+# from rplidar import RPLidar, RPLidarException
+import numpy as np
+import matplotlib.pyplot as plt
 
 class ObstacleAvoidanceNode(Node):
 
@@ -35,12 +37,12 @@ class ObstacleAvoidanceNode(Node):
     # }
 
 
-    drive_cmd_by_dir = {
-        'N': drive_north,
-        'E': drive_east,
-        'S': drive_south,
-        'W': drive_west,
-    }
+    # drive_cmd_by_dir = {
+    #     'N': drive_north,
+    #     'E': drive_east,
+    #     'S': drive_south,
+    #     'W': drive_west,
+    # }
 
     def __init__(self):
         super().__init__('obstacle_avoidance_node')
@@ -89,10 +91,34 @@ class ObstacleAvoidanceNode(Node):
                 self.close_points_by_dir[direction] = len([point for point in self.lidar_scan if point[1] > angle_range[0] and point[1] < angle_range[1] and point[0] < 1000])
         self.next_dir = min(self.close_points_by_dir, key=self.close_points_by_dir.get)
 
+    def fake_lidar_scan(self):
+        self.lidar_scan = np.array([np.random.randint(low=0, high=15, size=50), np.random.randint(low=0, high=180, size=50), np.random.randint(low=100, high=2000, size=50)]).T
+
+    def visualize_lidar(self):
+        x = self.lidar_scan[:,2]*np.cos(np.deg2rad(self.lidar_scan[:,1]))
+        y = self.lidar_scan[:,2]*np.sin(np.deg2rad(self.lidar_scan[:,1]))
+        print(self.next_dir)
+        plt.plot(x,y, 'o')
+        # plt.xticks([-2000, 2000])
+        # plt.yticks([-2000, 2000])
+        plt.xlim([-2000, 2000])
+        plt.ylim([-2000, 2000])
+        if self.next_dir == 'W':
+            plt.quiver(0, 0, 0, -1000)
+        if self.next_dir == 'N':
+            plt.quiver(0, 0, -1000, 0)
+        if self.next_dir == 'E':
+            plt.quiver(0, 0, 0, 1000)
+        if self.next_dir == 'S':
+            plt.quiver(0, 0, 1000, 0)
+        plt.show()
+
     def run_loop(self):
-        self.get_lidar_scan()
+        # self.get_lidar_scan()
+        self.fake_lidar_scan()
         self.process_lidar()
-        self.drive_cmd_by_dir[self.next_dir]()
+        self.visualize_lidar()
+        # self.drive_cmd_by_dir[self.next_dir]()
 
 def main(args=None):
     rclpy.init(args=args)
