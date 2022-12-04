@@ -12,23 +12,23 @@ class SimpleReceiveTeleop(Node):
     def process_keyboard_input(self, msg: String):
         print(msg.data)
         if msg.data == 'q':
-            drive_diag_NW()
+            drive_diag_NW(MOTOR_ONE_PINS, MOTOR_TWO_PINS, MOTOR_THREE_PINS, MOTOR_FOUR_PINS, 0.002, 500)
         elif msg.data == 'w':
-            drive_north()
+            drive_north(MOTOR_ONE_PINS, MOTOR_TWO_PINS, MOTOR_THREE_PINS, MOTOR_FOUR_PINS, 0.002, 500)
         elif msg.data == 'e':
-            drive_diag_NE()
+            drive_diag_NE(MOTOR_ONE_PINS, MOTOR_TWO_PINS, MOTOR_THREE_PINS, MOTOR_FOUR_PINS, 0.002, 500)
         elif msg.data == 'a':
-            drive_west()
+            drive_west(MOTOR_ONE_PINS, MOTOR_TWO_PINS, MOTOR_THREE_PINS, MOTOR_FOUR_PINS, 0.002, 500)
         elif msg.data == 's':
             pass
         elif msg.data == 'd':
-            drive_east()
+            drive_east(MOTOR_ONE_PINS, MOTOR_TWO_PINS, MOTOR_THREE_PINS, MOTOR_FOUR_PINS, 0.002, 500)
         elif msg.data == 'z':
-            drive_diag_SW()
+            drive_diag_SW(MOTOR_ONE_PINS, MOTOR_TWO_PINS, MOTOR_THREE_PINS, MOTOR_FOUR_PINS, 0.002, 500)
         elif msg.data == 'x':
-            drive_south()
+            drive_south(MOTOR_ONE_PINS, MOTOR_TWO_PINS, MOTOR_THREE_PINS, MOTOR_FOUR_PINS, 0.002, 500)
         elif msg.data == 'c':
-            drive_diag_SE()
+            drive_diag_SE(MOTOR_ONE_PINS, MOTOR_TWO_PINS, MOTOR_THREE_PINS, MOTOR_FOUR_PINS, 0.002, 500)
 
 def main(args=None):
     rclpy.init(args=args)
