@@ -142,7 +142,7 @@ def reverse_motors(motor_one_pins, motor_two_pins, motor_three_pins, motor_four_
 
 
 
-def drive_north():
+def drive_north(motor_one_pins, motor_two_pins, motor_three_pins, motor_four_pins, time_sleep, revolutions):
     '''
     runs the motors in a north direction for one step. should be called in a loop
     '''
@@ -175,7 +175,7 @@ def drive_north():
         time.sleep(time_sleep)
 
 
-def drive_south():
+def drive_south(motor_one_pins, motor_two_pins, motor_three_pins, motor_four_pins, time_sleep, revolutions):
     # read sensor value here
     # all wheels at the same speed, and moves backwards
     for _ in range(NUM_STEPS_PER_CMD):
@@ -204,7 +204,7 @@ def drive_south():
         time.sleep(time_sleep)
 
 
-def drive_east():
+def drive_east(motor_one_pins, motor_two_pins, motor_three_pins, motor_four_pins, time_sleep, revolutions):
     # read sensor values here
     # all wheels at the same speed, front right/back left go backwards, and other two go forwards
     for _ in range(NUM_STEPS_PER_CMD):
@@ -234,7 +234,7 @@ def drive_east():
 
 
 
-def drive_west():
+def drive_west(motor_one_pins, motor_two_pins, motor_three_pins, motor_four_pins, time_sleep, revolutions):
     # read sensor values here
     # all wheels at the same speed, front right/back left go forwards, other two go backwards
     for _ in range(NUM_STEPS_PER_CMD):
@@ -263,7 +263,7 @@ def drive_west():
         time.sleep(time_sleep)
 
 
-def drive_diag_NE():
+def drive_diag_NE(motor_one_pins, motor_two_pins, motor_three_pins, motor_four_pins, time_sleep, revolutions):
     # read sensor values here
     # front right/back left don't move, front left/back right move forward
     for _ in range(NUM_STEPS_PER_CMD):
@@ -284,7 +284,7 @@ def drive_diag_NE():
         time.sleep(time_sleep)
 
 
-def drive_diag_NW():
+def drive_diag_NW(motor_one_pins, motor_two_pins, motor_three_pins, motor_four_pins, time_sleep, revolutions):
     # read sensor values here
     # front right/back left move forwards, front left/back right don't move
     for _ in range(NUM_STEPS_PER_CMD):
@@ -305,7 +305,7 @@ def drive_diag_NW():
         time.sleep(time_sleep)
 
 
-def drive_diag_SW():
+def drive_diag_SW(motor_one_pins, motor_two_pins, motor_three_pins, motor_four_pins, time_sleep, revolutions):
     # read sensor values here
     # front right and back left motors don't move. front left and back right move at the same speeds and Bacjwards.
     for _ in range(NUM_STEPS_PER_CMD):
@@ -326,7 +326,7 @@ def drive_diag_SW():
         time.sleep(time_sleep)
 
 
-def drive_diag_SE():
+def drive_diag_SE(motor_one_pins, motor_two_pins, motor_three_pins, motor_four_pins, time_sleep, revolutions):
     # read sensor values here
     # front right and back left motors move at speeds and bakcwards. Other two don't move
     for _ in range(NUM_STEPS_PER_CMD):
@@ -347,7 +347,7 @@ def drive_diag_SE():
         time.sleep(time_sleep)
 
 
-def rotate_clock():
+def rotate_clock(motor_one_pins, motor_two_pins, motor_three_pins, motor_four_pins, time_sleep, revolutions):
     # read sensor value
     # front left and back left move forward. other two move backwards
     phase_one(MOTOR_ONE_PINS)
@@ -375,7 +375,7 @@ def rotate_clock():
     time.sleep(time_sleep)
 
 
-def rotate_counter_clock():
+def rotate_counter_clock(motor_one_pins, motor_two_pins, motor_three_pins, motor_four_pins, time_sleep, revolutions):
     # front left and back left move backward. other two move forward
     phase_one_reversed(MOTOR_ONE_PINS)
     phase_one(MOTOR_TWO_PINS)
@@ -408,7 +408,7 @@ def rotate_counter_clock():
 # print("running")
 setup_all_pins()
 # run_motors(MOTOR_ONE_PINS, MOTOR_TWO_PINS, MOTOR_THREE_PINS, MOTOR_FOUR_PINS, 0.002, 500)
-drive_north()
+drive_north(MOTOR_ONE_PINS, MOTOR_TWO_PINS, MOTOR_THREE_PINS, MOTOR_FOUR_PINS, 0.002, 500)
 print("done")
 # time.sleep(1)
 # print("reversing")
