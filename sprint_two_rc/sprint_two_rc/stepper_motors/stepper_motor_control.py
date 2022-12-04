@@ -3,10 +3,14 @@ import time
 
 
 # Connect GPIO to [IN1 , IN2 , IN3 ,IN4] on Motor PCB
-MOTOR_ONE_PINS = [6, 13, 19, 26]    # front left
-MOTOR_TWO_PINS = [21, 20, 16, 12]   # front right
-MOTOR_THREE_PINS = [4, 17, 27, 22]  # back left
-MOTOR_FOUR_PINS = [18, 23, 24, 25]  # back right
+# note that this follows the gpio numbering, not the pin numbering. If you want pin numbering, change the first line of `setup_all_pins()`
+MOTOR_ONE_PINS = [7, 11, 13, 15]    # back left
+MOTOR_TWO_PINS = [12, 16, 18, 22]   # back right
+MOTOR_THREE_PINS = [29, 31, 33, 35]  # front left
+MOTOR_FOUR_PINS = [32, 36, 38, 40]  # front right
+
+
+
 
 NUM_STEPS_PER_CMD = 50
 
@@ -16,15 +20,17 @@ time_sleep = 0.004
 
 def setup_pins(motor_pins):
     for pin in motor_pins:
+        print("pin", pin)
         GPIO.setup(pin, GPIO.OUT)
 
 def setup_all_pins():
     # we're using the GPIO numbering system, not the board
-    GPIO.setmode(GPIO.BCM)
+    GPIO.setmode(GPIO.BOARD)
     setup_pins(MOTOR_ONE_PINS)
     setup_pins(MOTOR_TWO_PINS)
     setup_pins(MOTOR_THREE_PINS)
     setup_pins(MOTOR_FOUR_PINS)
+    print("done setting up pins")
 
 # step 1 - high low high low
 def phase_one(motor_pins):
@@ -75,18 +81,15 @@ def phase_three_reversed(motor_pins):
 
 # functions for robot movement
 
-
-
-
 def run_motors(motor_one_pins, motor_two_pins, motor_three_pins, motor_four_pins, time_sleep, revolutions):
     '''
     runs all four motors, should be used to test them
     '''
     for i in range(revolutions):
-        phase_one_reversed(motor_one_pins)
-        phase_one_reversed(motor_two_pins)
-        phase_one_reversed(motor_three_pins)
-        phase_one_reversed(motor_four_pins)
+        phase_one(motor_one_pins)
+        phase_one(motor_two_pins)
+        phase_one(motor_three_pins)
+        phase_one(motor_four_pins)
         time.sleep(time_sleep)
         
         phase_two(motor_one_pins)
@@ -95,10 +98,10 @@ def run_motors(motor_one_pins, motor_two_pins, motor_three_pins, motor_four_pins
         phase_two(motor_four_pins)
         time.sleep(time_sleep)
         
-        phase_three_reversed(motor_one_pins)
-        phase_three_reversed(motor_two_pins)
-        phase_three_reversed(motor_three_pins)
-        phase_three_reversed(motor_four_pins)
+        phase_three(motor_one_pins)
+        phase_three(motor_two_pins)
+        phase_three(motor_three_pins)
+        phase_three(motor_four_pins)
         time.sleep(time_sleep)
         
         phase_four(motor_one_pins)
@@ -108,10 +111,9 @@ def run_motors(motor_one_pins, motor_two_pins, motor_three_pins, motor_four_pins
         time.sleep(time_sleep)
 
 
-
 def reverse_motors(motor_one_pins, motor_two_pins, motor_three_pins, motor_four_pins, time_sleep, revolutions):
     '''
-    runs all four motors in reverse
+    runs all four motors in reverse. Should be used to test them
     '''
     for i in range(revolutions):
         phase_one_reversed(motor_one_pins)
@@ -139,9 +141,13 @@ def reverse_motors(motor_one_pins, motor_two_pins, motor_three_pins, motor_four_
         time.sleep(time_sleep)
 
 
-# runs the motors in a north direction for one step. should be called in a loop
+
 def drive_north():
-    # read sensor value here
+    '''
+    runs the motors in a north direction for one step. should be called in a loop
+    '''
+    # TODO: read sensor value here
+
     # all wheels at the same speed, and moves forward
     for _ in range(NUM_STEPS_PER_CMD):
         phase_one_reversed(MOTOR_ONE_PINS)
@@ -226,7 +232,8 @@ def drive_east():
         phase_four(MOTOR_FOUR_PINS)
         time.sleep(time_sleep)
 
-    
+
+
 def drive_west():
     # read sensor values here
     # all wheels at the same speed, front right/back left go forwards, other two go backwards
@@ -399,7 +406,10 @@ def rotate_counter_clock():
 
 
 # print("running")
+setup_all_pins()
 # run_motors(MOTOR_ONE_PINS, MOTOR_TWO_PINS, MOTOR_THREE_PINS, MOTOR_FOUR_PINS, 0.002, 500)
+drive_north()
+print("done")
 # time.sleep(1)
 # print("reversing")
 # reverse_motors(MOTOR_ONE_PINS, MOTOR_TWO_PINS, MOTOR_THREE_PINS, MOTOR_FOUR_PINS, 0.002, 500)
@@ -414,8 +424,7 @@ def rotate_counter_clock():
 
 
 
-
-# GPIO.cleanup()
+GPIO.cleanup()
 
 
 
