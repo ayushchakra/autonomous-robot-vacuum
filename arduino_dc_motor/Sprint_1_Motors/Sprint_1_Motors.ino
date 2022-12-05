@@ -17,9 +17,12 @@ void setup() {
 
 void loop() {
   if (Serial.available() > 0) {
-    currDriveMode = Serial.parseInt();
+//    currDriveMode = Serial.parseInt();
+//    Serial.write(currDriveMode);
+    String a = Serial.readString();
+    currDriveMode = a.toInt();
+//    Serial.println(currDriveMode);
   }
-
   if(currDriveMode==1) {
     driveNorth();
   }
@@ -49,6 +52,9 @@ void loop() {
   }
   else if(currDriveMode==10) {
     rotateCounterClock();
+  }
+  else if(currDriveMode==11) {
+    tempStop();
   }
 //  switch (currDriveMode) {
 //    case 1:
@@ -204,5 +210,17 @@ void rotateCounterClock(){         //drive straight
   frontRightMotor->run(FORWARD);   //at a speed of 50
   frontLeftMotor->run(BACKWARD);
   backLeftMotor->run(BACKWARD);
+  backRightMotor->run(FORWARD);
+}
+
+void tempStop() {
+    frontRightMotor->setSpeed(0);   //at a speed of 50
+  frontLeftMotor->setSpeed(0);
+  backLeftMotor->setSpeed(0);
+  backRightMotor->setSpeed(0);
+  
+  frontRightMotor->run(FORWARD);   //at a speed of 50
+  frontLeftMotor->run(FORWARD);
+  backLeftMotor->run(FORWARD);
   backRightMotor->run(FORWARD);
 }
