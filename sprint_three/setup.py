@@ -22,6 +22,7 @@ setup(
         'console_scripts': [
             'laptop_sender = sprint_three.laptop_sender:main',
             'rpi_receiver = sprint_three.rpi_receiver:main',
+            'obstacle_avoidance = sprint_three.obstacle_avoidance:main'
         ],
     },
 )
