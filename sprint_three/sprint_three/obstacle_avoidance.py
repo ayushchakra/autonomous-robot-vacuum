@@ -21,7 +21,7 @@ class ObstacleAvoidanceNode(Node):
     }
 
     dir_to_serial = {
-        'S': str.encode('11'),
+        'S': str.encode('2'),
         'SW': str.encode('8'),
         'W': str.encode('4'),
         'NW': str.encode('6'),
@@ -33,7 +33,7 @@ class ObstacleAvoidanceNode(Node):
 
     def __init__(self):
         super().__init__('obstacle_avoidance_node')
-        self.timer = self.create_timer(.1, self.run_loop)
+        self.timer = self.create_timer(2.5, self.run_loop)
 
         self.ser_con = None
         self.initialize_serial()
@@ -54,7 +54,7 @@ class ObstacleAvoidanceNode(Node):
         self.drive_dir = None
 
     def initialize_serial(self):
-        self.ser_con = serial.Serial(SERIAL_PORT)
+        self.ser_con = serial.Serial(SERIAL_PORT, 9600, timeout=1)
 
     def run_loop(self):
         self.update_lidar_scan()
