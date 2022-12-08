@@ -35,7 +35,7 @@ class ObstacleAvoidanceNode(Node):
 
     def __init__(self):
         super().__init__('obstacle_avoidance_node')
-        self.timer = self.create_timer(2.5, self.run_loop)
+        self.timer = self.create_timer(1, self.run_loop)
 
         self.ser_con = None
         self.initialize_serial()
@@ -99,15 +99,17 @@ class ObstacleAvoidanceNode(Node):
                     self.lidar_scan if point[1] > angle_range[0] and point[1]\
                     < angle_range[1] and point[2] < CLOSE_DIST_THRESH])
                 self.dist_by_dir[direction] = sum([point[2] for point in\
-                    self.lidar_scan if (point[1] > angle_range[0] or point[1]\
-                    < angle_range[1]) and point[2] < CLOSE_DIST_THRESH])
+                    self.lidar_scan if point[1] > angle_range[0] and point[1]\
+                    < angle_range[1]])
 
     def update_drive_command(self):
         if min(self.close_points_by_dir.values()) > 0:
             self.ser_con.write(self.dir_to_serial['R'])
+            print("here")
         else:
             self.drive_dir = min(self.dist_by_dir, key=self.close_points_by_dir.get)
             self.ser_con.write(self.dir_to_serial[self.drive_dir])
+            print(self.drive_dir)
 
 def main(args=None):
     rclpy.init(args=args)
