@@ -2,6 +2,7 @@ import rclpy
 from rclpy.node import Node
 from rplidar import RPLidar, RPLidarException
 import serial
+import pdb
 
 LIDAR_PORT = '/dev/ttyUSB0'
 SERIAL_PORT = '/dev/ttyACM0'
@@ -17,7 +18,7 @@ class ObstacleAvoidanceNode(Node):
         'N': [157.5, 202.5],
         'NE': [202.5, 247.5],
         'E': [247.5, 292.5],
-        'SE': [292.5, 337.5]
+        'SE': [292.5, 337.5],
     }
 
     dir_to_serial = {
@@ -29,6 +30,7 @@ class ObstacleAvoidanceNode(Node):
         'NE': str.encode('5'),
         'E': str.encode('3'),
         'SE': str.encode('7'),
+        'R': str.encode('9')
     }
 
     def __init__(self):
@@ -41,6 +43,16 @@ class ObstacleAvoidanceNode(Node):
         self.lidar = RPLidar(LIDAR_PORT)
         self.lidar_scan = None
         self.close_points_by_dir = {
+            'N': 0,
+            'NE': 0,
+            'E': 0,
+            'SE': 0,
+            'S': 0,
+            'SW': 0,
+            'W': 0,
+            'NW': 0
+        }
+        self.dist_by_dir = {
             'N': 0,
             'NE': 0,
             'E': 0,
@@ -79,14 +91,23 @@ class ObstacleAvoidanceNode(Node):
                 self.close_points_by_dir[direction] = len([point for point in\
                     self.lidar_scan if (point[1] > angle_range[0] or point[1]\
                     < angle_range[1]) and point[2] < CLOSE_DIST_THRESH])
+                self.dist_by_dir[direction] = sum([point[2] for point in\
+                    self.lidar_scan if point[1] > angle_range[0] or point[1]\
+                    < angle_range[1]])
             else:
                 self.close_points_by_dir[direction] = len([point for point in\
                     self.lidar_scan if point[1] > angle_range[0] and point[1]\
                     < angle_range[1] and point[2] < CLOSE_DIST_THRESH])
-    
+                self.dist_by_dir[direction] = sum([point[2] for point in\
+                    self.lidar_scan if (point[1] > angle_range[0] or point[1]\
+                    < angle_range[1]) and point[2] < CLOSE_DIST_THRESH])
+
     def update_drive_command(self):
-        self.drive_dir = min(self.close_points_by_dir, key=self.close_points_by_dir.get)
-        self.ser_con.write(self.dir_to_serial[self.drive_dir])
+        if min(self.close_points_by_dir.values()) > 0:
+            self.ser_con.write(self.dir_to_serial['R'])
+        else:
+            self.drive_dir = min(self.dist_by_dir, key=self.close_points_by_dir.get)
+            self.ser_con.write(self.dir_to_serial[self.drive_dir])
 
 def main(args=None):
     rclpy.init(args=args)
