@@ -1,22 +1,11 @@
 import rclpy
 from rclpy.node import Node
-# from .stepper_motors.stepper_motor_control import *
-# from rplidar import RPLidar, RPLidarException
+from .stepper_motors.stepper_motor_control import *
+from rplidar import RPLidar, RPLidarException
 import numpy as np
 import matplotlib.pyplot as plt
 
 class ObstacleAvoidanceNode(Node):
-
-    # angle_by_dir = {
-    #     'N': [337.5, 22.5],
-    #     'NE': [22.5, 67.5],
-    #     'E': [67.5, 112.5],
-    #     'SE': [112.5, 157.5],
-    #     'S': [157.5, 202.5],
-    #     'SW': [202.5, 247.5],
-    #     'W': [247.5, 292.5],
-    #     'NW': [292.5, 337.5]
-    # }
 
     angle_by_dir = {
         'N': [315, 45],
@@ -25,41 +14,18 @@ class ObstacleAvoidanceNode(Node):
         'W': [225, 315],
     }
 
-    # drive_cmd_by_dir = {
-    #     'N': drive_north,
-    #     'NE': drive_diag_NE,
-    #     'E': drive_east,
-    #     'SE': drive_diag_SE,
-    #     'S': drive_south,
-    #     'SW': drive_diag_SW,
-    #     'W': drive_west,
-    #     'NW': drive_diag_NW,
-    # }
-
-
-    # drive_cmd_by_dir = {
-    #     'N': drive_north,
-    #     'E': drive_east,
-    #     'S': drive_south,
-    #     'W': drive_west,
-    # }
-
     def __init__(self):
         super().__init__('obstacle_avoidance_node')
         self.lidar_port = '/dev/ttyUSB0'
-        # self.lidar = RPLidar(self.lidar_port)
+        self.lidar = RPLidar(self.lidar_port)
         self.timer = self.create_timer(.1, self.run_loop)
         self.lidar_scan = None
-        # self.close_points_by_dir = {
-        #     'N': 0,
-        #     'NE': 0,
-        #     'E': 0,
-        #     'SE': 0,
-        #     'S': 0,
-        #     'SW': 0,
-        #     'W': 0,
-        #     'NW': 0
-        # }
+        self.close_points_by_dir = {
+            'N': 0,
+            'E': 0,
+            'S': 0,
+            'W': 0,
+        }
         self.close_points_by_dir = {
             'N': 0,
             'E': 0,

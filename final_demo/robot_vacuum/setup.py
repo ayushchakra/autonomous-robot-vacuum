@@ -1,6 +1,6 @@
 from setuptools import setup
 
-package_name = 'sprint_two_rc'
+package_name = 'robot_vacuum'
 
 setup(
     name=package_name,
@@ -13,17 +13,16 @@ setup(
     ],
     install_requires=['setuptools'],
     zip_safe=True,
-    maintainer='achakraborty',
+    maintainer='ayush',
     maintainer_email='achakraborty@olin.edu',
     description='TODO: Package description',
     license='TODO: License declaration',
     tests_require=['pytest'],
     entry_points={
         'console_scripts': [
-            'send_teleop = sprint_two_rc.send_teleop:main',
-            'simple_send_teleop = sprint_two_rc.simple_send_teleop:main',
-            'simple_receive_teleop = sprint_two_rc.simple_receive_teleop:main',
-            'obstacle_avoidance = sprint_two_rc.obstacle_avoidance:main',
+            'laptop_sender = robot_vacuum.laptop_interface:main',
+            'rpi_receiver = robot_vacuum.rpi_interface:main',
+            'obstacle_avoidance = robot_vacuum.obstacle_avoidance:main'
         ],
     },
 )
