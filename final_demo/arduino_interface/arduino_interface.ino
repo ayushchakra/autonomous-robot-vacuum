@@ -1,28 +1,30 @@
-#include <Adafruit_MotorShield.h>                     //include motor shield library
+#include <Adafruit_MotorShield.h>                       //include motor shield library
 
-Adafruit_MotorShield AFMS = Adafruit_MotorShield();   //create Adafruit_MotorShield object
-Adafruit_DCMotor *frontLeftMotor = AFMS.getMotor(2);      //assign the right motor to port M1
-Adafruit_DCMotor *frontRightMotor = AFMS.getMotor(1);       //assign the left motor to port M3
-Adafruit_DCMotor *backLeftMotor = AFMS.getMotor(3);      //assign the right motor to port M1
-Adafruit_DCMotor *backRightMotor = AFMS.getMotor(4);       //assign the left motor to port M3
+Adafruit_MotorShield AFMS = Adafruit_MotorShield();     //create Adafruit_MotorShield object
+Adafruit_DCMotor *frontLeftMotor = AFMS.getMotor(2);    //assign the right motor to port M1
+Adafruit_DCMotor *frontRightMotor = AFMS.getMotor(1);   //assign the left motor to port M3
+Adafruit_DCMotor *backLeftMotor = AFMS.getMotor(3);     //assign the right motor to port M1
+Adafruit_DCMotor *backRightMotor = AFMS.getMotor(4);    //assign the left motor to port M3
 
-int currDriveMode = 0;
+int currDriveMode = 0;                                  //int that represents the current drive state (direction)
+int DRIVE_SPEED = 50;                                   //int that represents the drive speed of the robot
 
 void setup() {
-  Serial.flush();                                     //reset serial monitor
+  Serial.flush();                                       //reset serial monitor
   Serial.begin(9600);
 
-  AFMS.begin();                                       //begin the Adafruit_MotorShield object
+  AFMS.begin();                                         //begin the Adafruit_MotorShield object
 }
 
 void loop() {
+  //read the serial monitor to check to see if an update to the drive state has been requested
   if (Serial.available() > 0) {
-//    currDriveMode = Serial.parseInt();
-//    Serial.write(currDriveMode);
+    //if there is a new updated value, it is read and processed as an Integer
     String a = Serial.readString();
     currDriveMode = a.toInt();
-//    Serial.println(currDriveMode);
   }
+
+  //based on the current drive mode, the appropriate drive command is called
   if(currDriveMode==1) {
     driveNorth();
   }
@@ -36,16 +38,16 @@ void loop() {
     driveWest();
   }
   else if(currDriveMode==5) {
-    driveDiagNE();
+    driveNorthEast();
   }
   else if(currDriveMode==6) {
-    driveDiagNW();
+    driveNorthWest();
   }
   else if(currDriveMode==7) {
-    driveDiagSE();
+    driveSouthEast();
   }
   else if(currDriveMode==8) {
-    driveDiagSW();
+    driveSouthWest();
   }
   else if(currDriveMode==9) {
     rotateClock();
@@ -56,171 +58,168 @@ void loop() {
   else if(currDriveMode==11) {
     tempStop();
   }
-//  switch (currDriveMode) {
-//    case 1:
-//      driveNorth();
-//      Serial.println(1);
-//    case 2:
-//      driveSouth();
-//      Serial.println(2);
-//    case 3:
-//      driveEast();
-//      Serial.println(3);
-//    case 4:
-//      driveWest();
-//    case 5:
-//      driveDiagNE();
-//    case 6:
-//      driveDiagNW();
-//    case 7:
-//      driveDiagSE();
-//    case 8:
-//      driveDiagSW();
-//    case 9:
-//      rotateClock();
-//    case 10:
-//      rotateCounterClock();
-//  }
 }
 
-void driveNorth(){         //drive straight
-//  readSensorVal();
-  frontRightMotor->setSpeed(50);   //at a speed of 50
-  frontLeftMotor->setSpeed(50);
-  backLeftMotor->setSpeed(50);
-  backRightMotor->setSpeed(50);
+void driveNorth(){
+  //drive straight
+
+  //set the drive speeds
+  frontRightMotor->setSpeed(DRIVE_SPEED);
+  frontLeftMotor->setSpeed(DRIVE_SPEED);
+  backLeftMotor->setSpeed(DRIVE_SPEED);
+  backRightMotor->setSpeed(DRIVE_SPEED);
   
-  frontRightMotor->run(FORWARD);   //at a speed of 50
+  //all motors should be going forward
+  frontRightMotor->run(FORWARD);
   frontLeftMotor->run(FORWARD);
   backLeftMotor->run(FORWARD);
   backRightMotor->run(FORWARD);
 }
 
-void driveSouth(){         //drive straight
-//  readSensorVal();
-  frontRightMotor->setSpeed(50);   //at a speed of 50
-  frontLeftMotor->setSpeed(50);
-  backLeftMotor->setSpeed(50);
-  backRightMotor->setSpeed(50);
+void driveSouth(){
+  //drive backwards
+
+  //set the drive speeds
+  frontRightMotor->setSpeed(DRIVE_SPEED);
+  frontLeftMotor->setSpeed(DRIVE_SPEED);
+  backLeftMotor->setSpeed(DRIVE_SPEED);
+  backRightMotor->setSpeed(DRIVE_SPEED);
   
-  frontRightMotor->run(BACKWARD);   //at a speed of 50
+  //all motors should be going
+  frontRightMotor->run(BACKWARD);
   frontLeftMotor->run(BACKWARD);
   backLeftMotor->run(BACKWARD);
   backRightMotor->run(BACKWARD);
 }
 
-void driveEast(){         //drive straight
-//  readSensorVal();
-  frontRightMotor->setSpeed(50);   //at a speed of 50
-  frontLeftMotor->setSpeed(50);
-  backLeftMotor->setSpeed(50);
-  backRightMotor->setSpeed(50);
-  
-  frontRightMotor->run(BACKWARD);   //at a speed of 50
+void driveEast(){
+  //drive to the right
+
+  //set the drive speeds
+  frontLeftMotor->setSpeed(DRIVE_SPEED);
+  backLeftMotor->setSpeed(DRIVE_SPEED);
+  backRightMotor->setSpeed(DRIVE_SPEED);
+
+  //diagonal motars are the same direction and front right should be going
+  //backwards  
+  frontRightMotor->run(BACKWARD);
   frontLeftMotor->run(FORWARD);
   backLeftMotor->run(BACKWARD);
   backRightMotor->run(FORWARD);
 }
 
-void driveWest(){         //drive straight
-//  readSensorVal();
-  frontRightMotor->setSpeed(50);   //at a speed of 50
-  frontLeftMotor->setSpeed(50);
-  backLeftMotor->setSpeed(50);
-  backRightMotor->setSpeed(50);
+void driveWest(){
+  //drive to the left
+
+  //set the drive speeds
+  frontRightMotor->setSpeed(DRIVE_SPEED);
+  frontLeftMotor->setSpeed(DRIVE_SPEED);
+  backLeftMotor->setSpeed(DRIVE_SPEED);
+  backRightMotor->setSpeed(DRIVE_SPEED);
   
-  frontRightMotor->run(FORWARD);   //at a speed of 50
+  //motors should be in the opposite direction of driveEast()
+  frontRightMotor->run(FORWARD);
   frontLeftMotor->run(BACKWARD);
   backLeftMotor->run(FORWARD);
   backRightMotor->run(BACKWARD);
 }
 
-void driveDiagNE(){         //drive straight
-//  readSensorVal();
-  frontRightMotor->setSpeed(0);   //at a speed of 50
-  frontLeftMotor->setSpeed(50);
+void driveNorthEast(){
+  //drive forward and to the right
+
+  //set the drive speeds (front right and back left are stationary)
+  frontRightMotor->setSpeed(0);
+  frontLeftMotor->setSpeed(DRIVE_SPEED);
   backLeftMotor->setSpeed(0);
-  backRightMotor->setSpeed(50);
+  backRightMotor->setSpeed(DRIVE_SPEED);
   
-  frontRightMotor->run(FORWARD);   //at a speed of 50
+
+  //back right and front left are set to forward
   frontLeftMotor->run(FORWARD);
-  backLeftMotor->run(FORWARD);
   backRightMotor->run(FORWARD);
 }
 
-void driveDiagNW(){         //drive straight
-//  readSensorVal();
-  frontRightMotor->setSpeed(50);   //at a speed of 50
+void driveNorthWest(){
+  //drive forward and to the left
+
+  //set the drive speeds (front left and back right are stationary)
+  frontRightMotor->setSpeed(DRIVE_SPEED);
   frontLeftMotor->setSpeed(0);
-  backLeftMotor->setSpeed(50);
+  backLeftMotor->setSpeed(DRIVE_SPEED);
   backRightMotor->setSpeed(0);
   
-  frontRightMotor->run(FORWARD);   //at a speed of 50
-  frontLeftMotor->run(FORWARD);
+
+  //back left and front right are set to forward
+  frontRightMotor->run(FORWARD);
   backLeftMotor->run(FORWARD);
-  backRightMotor->run(FORWARD);
 }
 
-void driveDiagSW(){         //drive straight
-//  readSensorVal();
-  frontRightMotor->setSpeed(0);   //at a speed of 50
-  frontLeftMotor->setSpeed(50);
+void driveSouthWest(){
+  //drive backward and to the left
+
+  //set the drive speeds (front right and back left are stationary)
+  frontRightMotor->setSpeed(0);
+  frontLeftMotor->setSpeed(DRIVE_SPEED);
   backLeftMotor->setSpeed(0);
-  backRightMotor->setSpeed(50);
+  backRightMotor->setSpeed(DRIVE_SPEED);
   
-  frontRightMotor->run(RELEASE);   //at a speed of 50
+  //opposite directions as driveNorthEast()
   frontLeftMotor->run(BACKWARD);
-  backLeftMotor->run(RELEASE);
   backRightMotor->run(BACKWARD);
 }
 
-void driveDiagSE(){         //drive straight
-//  readSensorVal();
-  frontRightMotor->setSpeed(50);   //at a speed of 50
+void driveSouthEast(){
+  //drive backward and to the right
+
+  //set the drive speeds (back right and front left are stationary)
+  frontRightMotor->setSpeed(DRIVE_SPEED);
   frontLeftMotor->setSpeed(0);
-  backLeftMotor->setSpeed(50);
+  backLeftMotor->setSpeed(DRIVE_SPEED);
   backRightMotor->setSpeed(0);
-  
-  frontRightMotor->run(BACKWARD);   //at a speed of 50
-  frontLeftMotor->run(RELEASE);
+
+  //opposite directions as driveNorthWest()  
+  frontRightMotor->run(BACKWARD);
   backLeftMotor->run(BACKWARD);
-  backRightMotor->run(RELEASE);
 }
 
-void rotateClock(){         //drive straight
-//  readSensorVal();
-  frontRightMotor->setSpeed(50);   //at a speed of 50
-  frontLeftMotor->setSpeed(50);
-  backLeftMotor->setSpeed(50);
-  backRightMotor->setSpeed(50);
+void rotateClock(){
+  //rotate clockwise
+
+  //set the drive speeds
+  frontRightMotor->setSpeed(DRIVE_SPEED);
+  frontLeftMotor->setSpeed(DRIVE_SPEED);
+  backLeftMotor->setSpeed(DRIVE_SPEED);
+  backRightMotor->setSpeed(DRIVE_SPEED);
   
-  frontRightMotor->run(BACKWARD);   //at a speed of 50
+  //right wheels backward and left wheels forward
+  frontRightMotor->run(BACKWARD);
   frontLeftMotor->run(FORWARD);
   backLeftMotor->run(FORWARD);
   backRightMotor->run(BACKWARD);
 }
 
-void rotateCounterClock(){         //drive straight
-//  readSensorVal();
-  frontRightMotor->setSpeed(50);   //at a speed of 50
-  frontLeftMotor->setSpeed(50);
-  backLeftMotor->setSpeed(50);
-  backRightMotor->setSpeed(50);
-  
-  frontRightMotor->run(FORWARD);   //at a speed of 50
+void rotateCounterClock(){
+  //rotate counterclockwise
+
+  //set the drive speeds
+  frontRightMotor->setSpeed(DRIVE_SPEED);
+  frontLeftMotor->setSpeed(DRIVE_SPEED);
+  backLeftMotor->setSpeed(DRIVE_SPEED);
+  backRightMotor->setSpeed(DRIVE_SPEED);
+
+  //opposite direction as rotateClock()
+  frontRightMotor->run(FORWARD);
   frontLeftMotor->run(BACKWARD);
   backLeftMotor->run(BACKWARD);
   backRightMotor->run(FORWARD);
 }
 
 void tempStop() {
-    frontRightMotor->setSpeed(0);   //at a speed of 50
+  //stop motor motion temporarily
+
+  //set each motor to 0
+  frontRightMotor->setSpeed(0);
   frontLeftMotor->setSpeed(0);
   backLeftMotor->setSpeed(0);
   backRightMotor->setSpeed(0);
-  
-  frontRightMotor->run(FORWARD);   //at a speed of 50
-  frontLeftMotor->run(FORWARD);
-  backLeftMotor->run(FORWARD);
-  backRightMotor->run(FORWARD);
 }
