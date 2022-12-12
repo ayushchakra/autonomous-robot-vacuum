@@ -1,6 +1,6 @@
 from setuptools import setup
 
-package_name = 'sprint_two_'
+package_name = 'sprint_two'
 
 setup(
     name=package_name,

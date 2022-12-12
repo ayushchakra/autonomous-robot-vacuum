@@ -7,14 +7,16 @@ import numpy as np
 import pdb
 import time
 
+
 class LidarNode(Node):
-    LIDAR_USB_PORT_NAME = ''
+    LIDAR_USB_PORT_NAME = ""
+
     def __init__(self):
-        super().__init__('lidar_node')
+        super().__init__("lidar_node")
         self.lidar_pub = self.create_publisher(Float64MultiArray, "scan", 10)
-        self.timer = self.create_timer(.1, self.run_loop)
+        self.timer = self.create_timer(0.1, self.run_loop)
         # self.lidar_port = self.get_usb_port()
-        self.lidar_port = '/dev/ttyUSB0'
+        self.lidar_port = "/dev/ttyUSB0"
         self.scan: Float64MultiArray = Float64MultiArray()
 
     def get_usb_port(self):
@@ -31,7 +33,7 @@ class LidarNode(Node):
             sweep.start_scanning()
             record_data = False
             for scan in sweep.get_scans():
-                angles = [float(sample.angle/1000) for sample in scan[0]]
+                angles = [float(sample.angle / 1000) for sample in scan[0]]
                 distances = [float(sample.distance) for sample in scan[0]]
                 if record_data:
                     break
@@ -39,6 +41,7 @@ class LidarNode(Node):
             self.scan.data = distances + angles
         self.lidar_pub.publish(self.scan)
         print("sent")
+
 
 def main(args=None):
     rclpy.init(args=args)
