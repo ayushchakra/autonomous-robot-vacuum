@@ -44,7 +44,6 @@ angle_by_dir = {
 
 for i, scan in enumerate(lidar.iter_scans()):
     print(scan)
-    pdb.set_trace()
     angles = [point[1] for point in scan]
     dists = [point[2]/10 for point in scan]
     for direction, angle_range in angle_by_dir.items():
